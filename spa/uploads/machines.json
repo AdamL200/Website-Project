@@ -1,0 +1,21 @@
+{
+	"title": "Appliance Summaries",
+	"data": [
+		{
+            "title": "Me mashin busted ",
+			"appliance": "Washa Mashen",
+			"age": 7,
+            "manufacturer": "Amazon Electric",
+            "description": "One day I was trying ta wosh da cloves but the machin did a backflip and died",
+            "pay": 70
+		},
+		{
+            "title": "Mike died :( ",
+			"appliance": "Mikewaver",
+			"age": 2,
+            "manufacturer": "Asda",
+            "description": "I tried using a tiktok lifehack where you put a toaster in a microwave and it blew up please help ",
+            "pay": 20
+		}
+	]
+}
