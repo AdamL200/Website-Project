@@ -55,8 +55,11 @@ export async function register(credentials) {
 }
 
 export async function addIssue(issueData) {
+	console.log("----------------------------------")
+	console.log(issueData)
+	console.log("2---------------------------------")
 	const sql = `INSERT INTO issues(appliance,age,manufacturer,summary,description,pay)
-	VALUES("${issueData.appliance}", "${issueData.age}", "${issueData.manufacturer}", "${issueData.summary}", "${issueData.description}", "${issueData.pay}");`
+	VALUES("${issueData.attributes.appliance}", "${issueData.attributes.age}", "${issueData.attributes.manufacturer}", "${issueData.attributes.summary}", "${issueData.attributes.description}", "${issueData.attributes.pay}");`
 	console.log(sql)
 	await db.query(sql)
 	return true

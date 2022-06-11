@@ -102,11 +102,11 @@ router.post('/api/files', async context => {
 }) */
 
 router.post('/api/issues', async context => {
-	console.log('POST /api/issues yeee')
+	console.log('POST /api/issues')
 	const body  = await context.request.body()
 	const data = await body.value
 	console.log(data)
-	//await addIssue(data) //try and get authentication working
+	await addIssue(data) //try and get authentication working
 	context.response.status = 201
 	context.response.body = JSON.stringify({ status: 'success', msg: 'issue added' })
 })

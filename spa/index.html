@@ -78,6 +78,7 @@
 		</section>
 	</template>
 	<template id="issues">
+
 		<form name="issue" method="post">
 			<label for="appliance">Select Appliance:</label>
 			<select name="appliance" id="appliance">
@@ -85,9 +86,11 @@
     			<option value="Dishwasher">Dishwasher</option>
     			<option value="Washing Machine">Washing Machine</option>
 			</select>
+
 			<label for=age>Product Age</label>
-			<p><input type="range" min="1" max="10" value="5" class="slider" id="age"></p>
+			<p><input type="range" min="1" max="10" value="5" class="slider" name="age"></p>
 			<p>Value: <output id="ageOut">5</output></p>
+			
 			<label for="manufacturer">Select Manufacturer:</label>
 			<p><select name="manufacturer" id="manufacturer">
     			<option value="Bosch">Bosch</option>
@@ -100,11 +103,12 @@
 			<textarea id="description" name="description" rows="10" cols="50">Enter a detailed description of the issue here</textarea>
 			
 			<p><label for=age>Max price you would pay to fix the issue</label></p>
-			<p><input type="range" min="0" max="200" value="100" class="slider" id="price"></p>
+			<p><input type="range" min="0" max="200" value="100" class="slider" name="price"></p>
 			<p>Price: £<output id="priceOut">100</output></p>
 
 			<p><button type="submit">Submit Issue</button></p>
 		</form>
+
 	</template>
 	</body>
 </html>
