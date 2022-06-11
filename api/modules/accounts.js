@@ -53,3 +53,11 @@ export async function register(credentials) {
 	await db.query(sql)
 	return true
 }
+
+export async function addIssue(issueData) {
+	const sql = `INSERT INTO issues(appliance,age,manufacturer,summary,description,pay)
+	VALUES("${issueData.appliance}", "${issueData.age}", "${issueData.manufacturer}", "${issueData.summary}", "${issueData.description}", "${issueData.pay}");`
+	console.log(sql)
+	await db.query(sql)
+	return true
+}
