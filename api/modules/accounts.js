@@ -59,7 +59,7 @@ export async function addIssue(issueData) {
 	console.log(issueData)
 	console.log("2---------------------------------")
 	const sql = `INSERT INTO issues(appliance,age,manufacturer,summary,description,pay)
-	VALUES("${issueData.attributes.appliance}", "${issueData.attributes.age}", "${issueData.attributes.manufacturer}", "${issueData.attributes.summary}", "${issueData.attributes.description}", "${issueData.attributes.pay}");`
+	VALUES("${issueData.attributes.appliance}", "${issueData.attributes.age}", "${issueData.attributes.manufacturer}", "${issueData.attributes.title}", "${issueData.attributes.description}", "${issueData.attributes.pay}");`
 	console.log(sql)
 	await db.query(sql)
 	return true

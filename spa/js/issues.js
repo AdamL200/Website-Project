@@ -65,12 +65,12 @@ async function addIssue() { //gets the data from the form and posts it to the sq
 	const requestBody = {
 		"type": "issue",
     	"attributes": {
-        	"title": "Me mashin busted ",
-			"appliance": "Washa Mashen",
-			"age": 7,
-        	"manufacturer": "Amazon Electric",
-        	"description": "One day I was trying ta wosh da cloves but the machin did a backflip and died",
-        	"pay": 70
+        	"title": data.summary,
+			"appliance": data.appliance,
+			"age": data.age,
+        	"manufacturer": data.manufacturer,
+        	"description": data.description,
+        	"pay": data.price
     	}
 	}
 	const url = '/api/issues'
@@ -86,10 +86,12 @@ async function addIssue() { //gets the data from the form and posts it to the sq
 		//body: JSON.stringify(data)
 		body: JSON.stringify(requestBody) 
 	}
-	//const response = await fetch(url, options)
-	//console.log(response)
-	//const json = await response.json()
-	//console.log(json)
+	console.log("This is the request body!")
+	console.log(requestBody)
+	const response = await fetch(url, options)
+	console.log(response)
+	const json = await response.json()
+	console.log(json)
 	showMessage('new issue added!')
 	loadPage('issues')
 }
