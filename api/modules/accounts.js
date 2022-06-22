@@ -84,3 +84,16 @@ export async function addIssue(issueData) {
 	await db.query(sql)
 	return true
 }
+
+export async function getIssues() {
+	let issues
+	console.log("getIssues function")
+	const sql = 'SELECT * FROM issues;'
+	try{
+		issues = await db.query(sql)
+	}catch(err){
+		console.log("Get issues error")
+	}
+	issues = JSON.stringify(issues)
+	return issues
+}

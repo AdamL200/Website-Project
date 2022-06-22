@@ -4,7 +4,7 @@
 import { Router } from 'oak'
 
 import { extractCredentials, dataURLtoFile } from 'util'
-import { login, register, addIssue, getAdmin} from 'accounts'
+import { login, register, addIssue, getAdmin, getIssues} from 'accounts'
 
 const router = new Router()
 
@@ -78,19 +78,17 @@ router.post('/api/files', async context => {
 	}
 })
 
-router.get('/api/issues', async context => { //This bit is unfinished carry on work from here!
+router.get('/api/issues', async context => { 
 	console.log('GET /api/issues')
-	const token = context.request.headers.get('Authorization')
-	console.log(`auth: ${token}`)
-	context.response.headers.set('Content-Type', 'application/json')
+	context.response.headers.set('Content-Type', 'application/vnd.api+json')
+	
+	let issues
 	try {
-		const credentials = extractCredentials(token)
-		console.log(credentials)
-		const username = await AddIssue(credentials)
-		console.log(`username: ${username}`)
+		issues = await getIssues()
+
 		context.response.body = JSON.stringify(
 			{
-				data: { username }
+				data: { issues, message: 'success' }
 			}, null, 2)
 	} catch(err) {
 		err.data = {
