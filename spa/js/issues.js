@@ -55,7 +55,7 @@ async function updatePrice(event) {
     		}
 } */
 
-async function addIssue() { //gets the data from the form and posts it to the sql database [not finished]
+async function addIssue() { //gets the data from the form and posts it to the sql database 
 	console.log('func addIssue')
 	event.preventDefault()
 	const formData = new FormData(event.target)
@@ -70,7 +70,8 @@ async function addIssue() { //gets the data from the form and posts it to the sq
 			"age": data.age,
         	"manufacturer": data.manufacturer,
         	"description": data.description,
-        	"pay": data.price
+        	"pay": data.price,
+			"username": localStorage.getItem('username')
     	}
 	}
 	const url = '/api/issues'

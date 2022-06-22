@@ -4,7 +4,7 @@
 import { Router } from 'oak'
 
 import { extractCredentials, dataURLtoFile } from 'util'
-import { login, register, addIssue} from 'accounts'
+import { login, register, addIssue, getAdmin} from 'accounts'
 
 const router = new Router()
 
@@ -25,10 +25,11 @@ router.get('/api/accounts', async context => {
 		const credentials = extractCredentials(token)
 		console.log(credentials)
 		const username = await login(credentials)
-		console.log(`username: ${username}`)
+		const admin = await getAdmin(username)
 		context.response.body = JSON.stringify(
 			{
-				data: { username }
+				data: { username, admin }
+				//data: {username}
 			}, null, 2)
 	} catch(err) {
 		err.data = {
@@ -77,7 +78,7 @@ router.post('/api/files', async context => {
 	}
 })
 
-/*router.get('/api/issues', async context => { //This bit is unfinished carry on work from here!
+router.get('/api/issues', async context => { //This bit is unfinished carry on work from here!
 	console.log('GET /api/issues')
 	const token = context.request.headers.get('Authorization')
 	console.log(`auth: ${token}`)
@@ -99,14 +100,14 @@ router.post('/api/files', async context => {
 		}
 		throw err
 	}
-}) */
+}) 
 
 router.post('/api/issues', async context => {
 	console.log('POST /api/issues')
 	const body  = await context.request.body()
 	const data = await body.value
 	console.log(data)
-	await addIssue(data) //try and get authentication working
+	await addIssue(data) 
 	context.response.status = 201
 	context.response.body = JSON.stringify({ status: 'success', msg: 'issue added' })
 })

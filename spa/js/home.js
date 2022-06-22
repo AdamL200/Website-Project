@@ -10,10 +10,14 @@ export async function setup(node) {
 		document.querySelector('header p').innerText = 'Home'
 		customiseNavbar(['home', 'foo', 'logout', 'issues']) // navbar if logged in
 		const token = localStorage.getItem('authorization')
+		const admin = localStorage.getItem('admin')
+		console.log(`admin = ${admin}`)
 		console.log(token)
-		if(token === null) customiseNavbar(['home', 'register', 'login']) //navbar if logged out
+		if(token === null) {customiseNavbar(['home', 'register', 'login']) //navbar if logged out
 		// add content to the page
-		await addContent(node)
+		await addContent(node) //displays not logged in content
+		}
+		await addLoggedInContent() //displays the content for logged in users
 	} catch(err) {
 		console.error(err)
 	}
@@ -41,5 +45,7 @@ async function addContent(node) {
 	document.querySelector('aside').classList.add('hidden')
 }
 
-
+async function addLoggedInContent(node,admin) {
+	
+}
 

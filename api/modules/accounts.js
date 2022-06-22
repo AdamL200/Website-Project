@@ -46,6 +46,26 @@ export async function login(credentials) {
 	return user
 }
 
+export async function getAdmin(username) {
+    let admin 
+	let sql = `SELECT admin FROM accounts WHERE user="${username}";`
+	let record
+	try {
+		record = await db.query(sql)
+	} catch(err) {
+		console.log('Admin checking error', err)
+		err.data = {
+			code: 500,
+			title: '500 Internal server error',
+			detail: 'the API database is currently down'
+		}
+		throw err
+	}
+	admin = record[0].admin
+	console.log(admin)
+	return admin
+}
+
 export async function register(credentials) {
 	credentials.pass = await hash(credentials.pass, salt)
 	const sql = `INSERT INTO accounts(user, pass) VALUES("${credentials.user}", "${credentials.pass}")`
@@ -58,8 +78,8 @@ export async function addIssue(issueData) {
 	console.log("----------------------------------")
 	console.log(issueData)
 	console.log("2---------------------------------")
-	const sql = `INSERT INTO issues(appliance,age,manufacturer,summary,description,pay)
-	VALUES("${issueData.attributes.appliance}", "${issueData.attributes.age}", "${issueData.attributes.manufacturer}", "${issueData.attributes.title}", "${issueData.attributes.description}", "${issueData.attributes.pay}");`
+	const sql = `INSERT INTO issues(appliance,age,manufacturer,summary,description,pay, username)
+	VALUES("${issueData.attributes.appliance}", "${issueData.attributes.age}", "${issueData.attributes.manufacturer}", "${issueData.attributes.title}", "${issueData.attributes.description}", "${issueData.attributes.pay}", "${issueData.attributes.username}");`
 	console.log(sql)
 	await db.query(sql)
 	return true

@@ -32,10 +32,12 @@ async function login() {
 	}
 	const response = await fetch('/api/accounts', options)
 	const json = await response.json()
+	console.log(json)
 
 	if(response.status === 200) {
 		localStorage.setItem('username', json.data.username)
 		localStorage.setItem('authorization', token)
+		localStorage.setItem('admin', json.data.admin )
 		showMessage(`you are logged in as ${json.data.username}`)
 		await loadPage('foo')
 	} else {
