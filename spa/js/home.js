@@ -16,8 +16,9 @@ export async function setup(node) {
 		if(token === null) {customiseNavbar(['home', 'register', 'login']) //navbar if logged out
 		// add content to the page
 		await addContent(node) //displays not logged in content
+		} else {
+		await addLoggedInContent(node, localStorage.getItem('admin')) //displays the content for logged in users
 		}
-		await addLoggedInContent() //displays the content for logged in users
 	} catch(err) {
 		console.error(err)
 	}
@@ -46,6 +47,43 @@ async function addContent(node) {
 }
 
 async function addLoggedInContent(node,admin) {
-	
+	console.log('func addLoggedInContent')
+	document.querySelector('aside > p').innerText = 'LOADING'
+	document.querySelector('aside').classList.remove('hidden')
+
+
+	const url = '/api/issues'
+	const options = {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/vnd.api+json',
+			'Accept': 'application/vnd.api+json',
+			'Authorization': `${localStorage.getItem('authorization')}`
+		},
+		
+	}
+	console.log("This is the data retrieved:")
+	const response = await fetch(url, options)
+	console.log(response)
+	const json = await response.json()
+	//console.log(json)
+	//console.log(json.data.issues[0]) //grabs a single issue
+	if(localStorage.getItem('admin') == 0) { //logged in as customer
+	const template = document.querySelector('template#customer')
+	console.log(json)
+	for(const issue of json.data.issues) {
+		console.log(issue)
+		const fragment = template.content.cloneNode(true)
+		fragment.querySelector('#appliance').innerText = issue.appliance
+		fragment.querySelector('#summary').innerText = issue.summary
+		fragment.querySelector('#date').innerText = issue.date
+		fragment.querySelector('#status').innerText = issue.status
+		node.appendChild(fragment)
+	}
+	// hide "LOADING" message
+	document.querySelector('aside').classList.add('hidden')
+	}
 }
+
+
 

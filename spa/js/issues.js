@@ -71,7 +71,12 @@ async function addIssue() { //gets the data from the form and posts it to the sq
         	"manufacturer": data.manufacturer,
         	"description": data.description,
         	"pay": data.price,
-			"username": localStorage.getItem('username')
+			"username": localStorage.getItem('username'),
+			"status": "unassigned",
+			"technician": "none",
+			"location": "301,400",
+			"date": "21/03/22,15:46"
+
     	}
 	}
 	const url = '/api/issues'

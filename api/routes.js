@@ -88,16 +88,16 @@ router.get('/api/issues', async context => {
 
 		context.response.body = JSON.stringify(
 			{
-				data: { issues, message: 'success' }
+				data: { issues }
 			}, null, 2)
 	} catch(err) {
 		err.data = {
 			code: 401,
-			title: '401 Unauthorized',
 			detail: err.message
 		}
 		throw err
 	}
+	context.response.status = 201
 }) 
 
 router.post('/api/issues', async context => {

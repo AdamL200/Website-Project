@@ -78,8 +78,8 @@ export async function addIssue(issueData) {
 	console.log("----------------------------------")
 	console.log(issueData)
 	console.log("2---------------------------------")
-	const sql = `INSERT INTO issues(appliance,age,manufacturer,summary,description,pay, username)
-	VALUES("${issueData.attributes.appliance}", "${issueData.attributes.age}", "${issueData.attributes.manufacturer}", "${issueData.attributes.title}", "${issueData.attributes.description}", "${issueData.attributes.pay}", "${issueData.attributes.username}");`
+	const sql = `INSERT INTO issues(appliance,age,manufacturer,summary,description,pay, username,date,status,technician, location)
+	VALUES("${issueData.attributes.appliance}", "${issueData.attributes.age}", "${issueData.attributes.manufacturer}", "${issueData.attributes.title}", "${issueData.attributes.description}", "${issueData.attributes.pay}", "${issueData.attributes.username}", "${issueData.attributes.date}", "${issueData.attributes.status}", "${issueData.attributes.technician}", "${issueData.attributes.location}");`
 	console.log(sql)
 	await db.query(sql)
 	return true
@@ -91,9 +91,15 @@ export async function getIssues() {
 	const sql = 'SELECT * FROM issues;'
 	try{
 		issues = await db.query(sql)
-	}catch(err){
-		console.log("Get issues error")
+	}catch(err) {
+		console.log('Get issue error', err)
+		err.data = {
+			code: 500,
+			title: '500 Internal server error',
+			detail: 'the API database is currently down'
+		}
+		throw err
 	}
-	issues = JSON.stringify(issues)
+	//issues = JSON.stringify(issues)
 	return issues
 }
