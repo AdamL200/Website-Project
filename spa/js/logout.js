@@ -7,6 +7,7 @@ export async function setup(node) {
 	try {
 		console.log('LOGOUT: setup')
 		customiseNavbar(['home', 'foo', 'issues'])
+		document.querySelector('#technician').classList.add('hidden')
 		node.querySelectorAll('button').forEach( button => button.addEventListener('click', event => {
 			console.log(event.target.innerText)
 			if(event.target.innerText === 'OK') {

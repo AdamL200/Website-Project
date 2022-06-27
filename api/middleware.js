@@ -55,6 +55,11 @@ async function authHeaderPresent(context, next) {
 		await next()
 		return
 	}
+	if(path === '/api/issues' && method === 'GET') {
+		console.log('Getting public information so auth header not needed')
+		await next()
+		return
+	}
 
 	if(context.request.headers.get('Authorization') === null) {
 		console.log('missing Authorization header')
@@ -87,6 +92,10 @@ async function validCredentials(context, next) {
 
 	// registering a new account so auth header not needed
 	if(path === '/api/accounts' && method === 'POST') {
+		await next()
+		return
+	}
+	if(path === '/api/issues' && method === 'GET') {
 		await next()
 		return
 	}

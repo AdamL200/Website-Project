@@ -11,7 +11,8 @@ export async function setup(node) {
 	try {
 		console.log(node)
 		document.querySelector('header p').innerText = 'Issues Page'
-		customiseNavbar(['home', 'logout', 'foo', 'issues'])
+		document.querySelector('#technician').classList.add('hidden')
+		customiseNavbar(['home', 'logout', 'issues'])
 		if(localStorage.getItem('authorization') === null) {
 			history.pushState(null, null, '/login')
 			await router()

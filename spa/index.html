@@ -21,6 +21,7 @@
 				<li><a href="/login">Log in</a></li>
 				<li><a href="/logout">Log out</a></li>
 				<li><a href="/issues">Issues</a></li>
+				<li><a href="/work">Work Available</a></li>
 			</ul>
 		</nav>
 		<main>
@@ -67,7 +68,7 @@
 		</ul>
 		<p>This page is a placeholder to help you understand how to access data in the URL and upload a file to a REST API. Once you understand how it works it should be removed from your project.</p>
 	</template>
-	<template id="quote">
+	<template id="quote">  <!--> Template used in the homepage when not logged in  </-->
 		<section>
 			<h2></h2>
 			<p id=appliance></p>
@@ -79,21 +80,16 @@
 	</template>
 	<template id="customer">
 		<section>
-			<p id=appliance></p>
+			<h2 id=appliance></h2>
 			<p id=summary></p>
 			<p id=date></p>
 			<p id=status></p>
 		</section>
 	</template>
-	<template id="technician">
-		<section>
-			<p id=appliance></p>
-			<p id=age></p>
-			<p id=manufacturer></p>
-			<p id=description></p>
-			<p id=pay><p>
-		</section>
-	</template>
+	<section id="technician" ">
+		<h2 id=admin1>Welcome to the admin home page</h2>
+		<p id=admin2>To look at available work please click the link at the top of the page</p>
+	</section>
 
 	<template id="issues">
 
@@ -128,5 +124,17 @@
 		</form>
 
 	</template>
+	<template id=work>
+		<p id=id class='hidden'></p>
+		<p id=distance></p>
+		<p id=appliance></p>
+		<p id=summary></p>
+		<p id=pay></p>
+		<button type="button">Details</button>
+	</template>
+	<template id=issue>
+
+	</template>
 	</body>
 </html>
+

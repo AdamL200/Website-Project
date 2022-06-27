@@ -8,17 +8,23 @@ export async function setup(node) {
 	try {
 		console.log(node)
 		document.querySelector('header p').innerText = 'Home'
-		customiseNavbar(['home', 'foo', 'logout', 'issues']) // navbar if logged in
+		 // navbar if logged in
 		const token = localStorage.getItem('authorization')
 		const admin = localStorage.getItem('admin')
-		console.log(`admin = ${admin}`)
-		console.log(token)
 		if(token === null) {customiseNavbar(['home', 'register', 'login']) //navbar if logged out
 		// add content to the page
 		await addContent(node) //displays not logged in content
-		} else {
-		await addLoggedInContent(node, localStorage.getItem('admin')) //displays the content for logged in users
+		} 
+		if (admin == 0){
+			customiseNavbar(['home', 'logout', 'issues'])
+			await addCustomerContent(node) //displays the content for logged in users
+		} 
+		if (admin == 1){
+
+			customiseNavbar(['home', 'logout', 'issues','work'])
+			await addAdminContent(node)
 		}
+
 	} catch(err) {
 		console.error(err)
 	}
@@ -29,12 +35,28 @@ async function addContent(node) {
 	// show "LOADING" message
 	document.querySelector('aside > p').innerText = 'LOADING'
 	document.querySelector('aside').classList.remove('hidden')
-	const response = await fetch('/uploads/machines.json')
-	const issues = await response.json()
+	document.querySelector('#technician').classList.add('hidden')
+
+	const url = '/api/issues'
+	const options = {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/vnd.api+json',
+			'Accept': 'application/vnd.api+json'
+			//'Authorization': `${localStorage.getItem('authorization')}`
+		},
+		
+	}
+	console.log("This is the data retrieved:")
+
+	//const response = await fetch('/uploads/machines.json')
+	const response = await fetch(url, options)
+	const json = await response.json()
 	const template = document.querySelector('template#quote')
-	for(const issue of issues.data) {
+	for(const issue of json.data.issues) {
 		const fragment = template.content.cloneNode(true)
-		fragment.querySelector('h2').innerText = issue.title
+		fragment.querySelector('h2').innerText = issue.summary
+		fragment.querySelector('h2').innerText = issue.summary
 		fragment.querySelector('#appliance').innerText = issue.appliance
 		fragment.querySelector('#age').innerText = issue.age
 		fragment.querySelector('#manufacturer').innerText = issue.manufacturer
@@ -46,10 +68,13 @@ async function addContent(node) {
 	document.querySelector('aside').classList.add('hidden')
 }
 
-async function addLoggedInContent(node,admin) {
-	console.log('func addLoggedInContent')
+async function addCustomerContent(node) {
+	console.log('func addCustomerContent')
 	document.querySelector('aside > p').innerText = 'LOADING'
 	document.querySelector('aside').classList.remove('hidden')
+	document.querySelector('#technician').classList.add('hidden')
+
+
 
 
 	const url = '/api/issues'
@@ -68,22 +93,33 @@ async function addLoggedInContent(node,admin) {
 	const json = await response.json()
 	//console.log(json)
 	//console.log(json.data.issues[0]) //grabs a single issue
-	if(localStorage.getItem('admin') == 0) { //logged in as customer
 	const template = document.querySelector('template#customer')
 	console.log(json)
 	for(const issue of json.data.issues) {
+		if (issue.username == localStorage.getItem('username')) {
 		console.log(issue)
 		const fragment = template.content.cloneNode(true)
 		fragment.querySelector('#appliance').innerText = issue.appliance
 		fragment.querySelector('#summary').innerText = issue.summary
-		fragment.querySelector('#date').innerText = issue.date
+		fragment.querySelector('#date').innerText = issue.date.slice(0,8)
 		fragment.querySelector('#status').innerText = issue.status
 		node.appendChild(fragment)
+		}
 	}
 	// hide "LOADING" message
 	document.querySelector('aside').classList.add('hidden')
-	}
+	
 }
 
 
+async function addAdminContent(node) {
+	console.log('func addAdminContent')
+	document.querySelector('aside > p').innerText = 'LOADING'
+	document.querySelector('aside').classList.remove('hidden')
+	document.querySelector('#technician').classList.remove('hidden')
 
+
+
+	// hide "LOADING" message
+	document.querySelector('aside').classList.add('hidden')
+}
