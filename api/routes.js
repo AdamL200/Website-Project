@@ -4,7 +4,7 @@
 import { Router } from 'oak'
 
 import { extractCredentials, dataURLtoFile } from 'util'
-import { login, register, addIssue, getAdmin, getIssues} from 'accounts'
+import { login, register, addIssue, getAdmin, getIssues, getIssue} from 'accounts'
 
 const router = new Router()
 
@@ -110,6 +110,28 @@ router.post('/api/issues', async context => {
 	context.response.body = JSON.stringify({ status: 'success', msg: 'issue added' })
 })
 
+router.get('/api/issues/:id', async context => { 
+	console.log(`GET /api/issue/${context.params.id}`)
+	console.log(context.params.id)
+	context.response.headers.set('Content-Type', 'application/vnd.api+json')
+	
+	let issue
+	try {
+		issue = await getIssue(context.params.id)
+
+		context.response.body = JSON.stringify(
+			{
+				data: { issue }
+			}, null, 2)
+	} catch(err) {
+		err.data = {
+			code: 401,
+			detail: err.message
+		}
+		throw err
+	}
+	context.response.status = 201
+}) 
 
 export default router
 

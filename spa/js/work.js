@@ -22,6 +22,10 @@ export async function setup(node) {
 		//console.log(localStorage.getItem('authorization'))
 		console.log(window.location)
 		await addWorkContent(node)
+		node.querySelector('#detailBtn').classList.add("hidden")
+		node.querySelectorAll('#detailBtn').forEach(item =>{
+			item.addEventListener('click', printOne)
+		})
 		//const interval = 2000
 		//window.setInterval( await updateBackground, interval )
 
@@ -52,6 +56,12 @@ async function addWorkContent(node) {
 	const json = await response.json()
 	//console.log(json)
 	//console.log(json.data.issues[0]) //grabs a single issue
+
+	//const detailBtn = document.createElement('button')
+	//detailBtn.type = 'button'
+	//detailBtn.innerText = 'Details'
+	//detailBtn.addEventListener('click', printOne)
+
 	const template = document.querySelector('template#work')
 	console.log(json)
 	for(const issue of json.data.issues) {
@@ -67,5 +77,10 @@ async function addWorkContent(node) {
 	}
 	// hide "LOADING" message
 	document.querySelector('aside').classList.add('hidden')
+
 	
+}
+
+function printOne() {
+	console.log("button Pressed")
 }

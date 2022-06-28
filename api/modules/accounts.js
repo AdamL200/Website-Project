@@ -92,7 +92,7 @@ export async function getIssues() {
 	try{
 		issues = await db.query(sql)
 	}catch(err) {
-		console.log('Get issue error', err)
+		console.log('Get issues error', err)
 		err.data = {
 			code: 500,
 			title: '500 Internal server error',
@@ -102,4 +102,26 @@ export async function getIssues() {
 	}
 	//issues = JSON.stringify(issues)
 	return issues
+}
+
+export async function getIssue(id) {
+	let issue
+	console.log(`getIssue function id=${id}`)
+	const sql = `SELECT * FROM issues WHERE id=${id};`
+	try{
+		console.log(sql)
+		issue = await db.query(sql)
+		if(issue.length === 0) throw new Error('record not found')
+		context.response.status = Status.ok
+	}catch(err) {
+		console.log('Get issue error', err)
+		err.data = {
+			code: 500,
+			title: '500 Internal server error',
+			detail: 'the API database is currently down'
+		}
+		throw err
+	}
+	//issues = JSON.stringify(issues)
+	return issue
 }
