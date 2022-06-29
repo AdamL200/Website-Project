@@ -16,12 +16,12 @@ export async function setup(node) {
 		await addContent(node) //displays not logged in content
 		} 
 		if (admin == 0){
-			customiseNavbar(['home', 'logout', 'issues'])
+			customiseNavbar(['home', 'logout', 'addIssue'])
 			await addCustomerContent(node) //displays the content for logged in users
 		} 
 		if (admin == 1){
 
-			customiseNavbar(['home', 'logout', 'issues','work'])
+			customiseNavbar(['home', 'logout', 'addIssue','work'])
 			await addAdminContent(node)
 		}
 
@@ -73,9 +73,6 @@ async function addCustomerContent(node) {
 	document.querySelector('aside > p').innerText = 'LOADING'
 	document.querySelector('aside').classList.remove('hidden')
 	document.querySelector('#technician').classList.add('hidden')
-
-
-
 
 	const url = '/api/issues'
 	const options = {

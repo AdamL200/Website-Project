@@ -1,18 +1,18 @@
-/* issues.js */
+/* Add issue.js */
 
 
 
-console.log('ISSUES PAGE')
+console.log('ADD ISSUE PAGE')
 
 import { customiseNavbar, file2DataURI, loadPage, router, showMessage } from '../util.js'
 
 export async function setup(node) {
-	console.log('ISSUES: setup')
+	console.log('ADD ISSUE: setup')
 	try {
 		console.log(node)
-		document.querySelector('header p').innerText = 'Issues Page'
+		document.querySelector('header p').innerText = 'AddIssue Page'
 		document.querySelector('#technician').classList.add('hidden')
-		customiseNavbar(['home', 'logout', 'issues'])
+		customiseNavbar(['home', 'logout'])
 		if(localStorage.getItem('authorization') === null) {
 			history.pushState(null, null, '/login')
 			await router()

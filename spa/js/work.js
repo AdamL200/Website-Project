@@ -4,7 +4,7 @@
 
 console.log('WORK PAGE')
 
-import { customiseNavbar, file2DataURI, loadPage, router, showMessage } from '../util.js'
+import { customiseNavbar, file2DataURI, loadPage,loadPage2, router, showMessage } from '../util.js'
 
 export async function setup(node) {
 	console.log('WORK: setup')
@@ -24,7 +24,7 @@ export async function setup(node) {
 		await addWorkContent(node)
 		node.querySelector('#detailBtn').classList.add("hidden")
 		node.querySelectorAll('#detailBtn').forEach(item =>{
-			item.addEventListener('click', printOne)
+			item.addEventListener('click', goDetails)
 		})
 		//const interval = 2000
 		//window.setInterval( await updateBackground, interval )
@@ -81,6 +81,10 @@ async function addWorkContent(node) {
 	
 }
 
-function printOne() {
-	console.log("button Pressed")
+function goDetails() {
+	console.log("godetails")
+	console.log(this.parentNode.children[0].innerText)
+	let id = this.parentNode.children[0].innerText
+	loadPage2("issue",id)
 }
+

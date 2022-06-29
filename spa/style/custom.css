@@ -19,3 +19,14 @@
 .purple{
 	background-color: purple;
 }
+
+body{
+	background-color: #E2EFDE;
+	
+}
+
+main{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

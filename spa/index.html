@@ -20,7 +20,7 @@
 				<li><a href="/foo">Foo</a></li>
 				<li><a href="/login">Log in</a></li>
 				<li><a href="/logout">Log out</a></li>
-				<li><a href="/issues">Issues</a></li>
+				<li><a href="/addIssue">Add Issue</a></li>
 				<li><a href="/work">Work Available</a></li>
 			</ul>
 		</nav>
@@ -91,7 +91,7 @@
 		<p id=admin2>To look at available work please click the link at the top of the page</p>
 	</section>
 
-	<template id="issues">
+	<template id="addIssue">
 
 		<form name="issue" method="post">
 			<label for="appliance">Select Appliance:</label>
@@ -125,16 +125,30 @@
 
 	</template>
 	<template id=work>
-		<p id=id class='hidden'></p>
-		<p id=distance></p>
-		<p id=appliance></p>
-		<p id=summary></p>
-		<p id=pay></p>
-		<button type="button" id="detailBtn" >Details</button>
+		<section>
+			<p id=id class='hidden'></p>
+			<p id=distance></p>
+			<p id=appliance></p>
+			<p id=summary></p>
+			<p id=pay></p>
+			<button type="button" id="detailBtn" >Details</button>
+		</section>
 	</template>
-	<template id=issue>
 
+	<template id=issue>
+		<p id=age></p>
+		<p id=appliance></p>
+		<p id=date></p>
+		<p id=description></p>
+		<p id=location></p>
+		<p id=manufacturer></p>
+		<p id=pay></p>
+		<p id=status></p>
+		<p id=summary></p>
+		<p id=technician></p>
+		<p id=username></p>
 	</template>
+
 	</body>
 </html>
 

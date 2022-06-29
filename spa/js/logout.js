@@ -6,7 +6,7 @@ import { customiseNavbar, loadPage, showMessage } from '../util.js'
 export async function setup(node) {
 	try {
 		console.log('LOGOUT: setup')
-		customiseNavbar(['home', 'foo', 'issues'])
+		customiseNavbar(['home', 'addIssue'])
 		document.querySelector('#technician').classList.add('hidden')
 		node.querySelectorAll('button').forEach( button => button.addEventListener('click', event => {
 			console.log(event.target.innerText)

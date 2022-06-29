@@ -40,6 +40,12 @@ export function showMessage(message, delay = 3000) {
 
 export async function loadPage(page) {
 	history.pushState(null, null, `/${page}`)
+	location.reload();
+	await router()
+}
+export async function loadPage2(page,id) {
+	history.pushState(null, null, `/${page}/${id}`)
+	location.reload();
 	await router()
 }
 

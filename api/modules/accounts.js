@@ -112,7 +112,6 @@ export async function getIssue(id) {
 		console.log(sql)
 		issue = await db.query(sql)
 		if(issue.length === 0) throw new Error('record not found')
-		context.response.status = Status.ok
 	}catch(err) {
 		console.log('Get issue error', err)
 		err.data = {
@@ -124,4 +123,14 @@ export async function getIssue(id) {
 	}
 	//issues = JSON.stringify(issues)
 	return issue
+}
+
+export async function putIssue(issueData, id) {
+	console.log("----------------------------------")
+	console.log(issueData)
+	console.log("2---------------------------------")
+	const sql = `UPDATE issues SET status = 'assigned', technician="${issueData.attributes.technician}" WHERE id=${id};` 
+	console.log(sql)
+	await db.query(sql)
+	return true
 }
