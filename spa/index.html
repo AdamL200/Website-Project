@@ -34,22 +34,29 @@
 			<template id="home">
 	</template>
 	<template id="login">
+		<section>
 		<form name="login">
 			<p><label for="email">Username</label><br /><input type="text" name="user" placeholder="username" /></p>
 			<p><label for="pass">Password</label><br /><input type="password" name="pass" placeholder="password" /></p>
 			<p><button type="submit">Log in</button></p>
 		</form>
+		</section>
 	</template>
 	<template id="register">
+		<section>
 		<form name="register">
 			<p><label for="name">Username</label><br /><input type="text" name="user" placeholder="full name" /></p>
 			<p><label for="pass">Password</label><br /><input type="password" name="pass" placeholder="password" /></p>
 			<p><button type="submit">Create account</button></p>
+
 		</form>
+		</section>
 	</template>
 	<template id="logout">
+		<section>
 			<p>Do you want to log out?</p>
 			<p><button>OK</button><button>Cancel</button></p>
+		</section>
 	</template>
 	<template id="foo">
 		<h2>Uploading File Demo</h2>
@@ -68,7 +75,7 @@
 		</ul>
 		<p>This page is a placeholder to help you understand how to access data in the URL and upload a file to a REST API. Once you understand how it works it should be removed from your project.</p>
 	</template>
-	<template id="quote">  <!--> Template used in the homepage when not logged in  </-->
+	<template id="quote">  <!--Template used in the homepage when not logged in  -->
 		<section>
 			<h2></h2>
 			<p id=appliance></p>
@@ -92,7 +99,7 @@
 	</section>
 
 	<template id="addIssue">
-
+		<section>
 		<form name="issue" method="post">
 			<label for="appliance">Select Appliance:</label>
 			<select name="appliance" id="appliance">
@@ -122,7 +129,7 @@
 
 			<p><button type="submit">Submit Issue</button></p>
 		</form>
-
+		</section>
 	</template>
 	<template id=work>
 		<section>
@@ -136,6 +143,7 @@
 	</template>
 
 	<template id=issue>
+		<section>
 		<p id=age></p>
 		<p id=appliance></p>
 		<p id=date></p>
@@ -147,6 +155,7 @@
 		<p id=summary></p>
 		<p id=technician></p>
 		<p id=username></p>
+		</section>
 	</template>
 
 	</body>
