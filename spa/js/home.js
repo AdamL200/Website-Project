@@ -24,6 +24,14 @@ export async function setup(node) {
 			customiseNavbar(['home', 'logout', 'addIssue','work'])
 			await addAdminContent(node)
 		}
+		
+		/*const button = document.createElement("button")
+		button.innerText = "Random Color!"
+		button.type = "button"
+		button.addEventListener('click', setBackground)
+		node.appendChild(button) */
+
+
 
 	} catch(err) {
 		console.error(err)
@@ -119,4 +127,21 @@ async function addAdminContent(node) {
 
 	// hide "LOADING" message
 	document.querySelector('aside').classList.add('hidden')
+}
+
+function setBackground() { //sets random bg color by click
+    const randomColor = Math.floor(Math.random()*16777215).toString(16)
+	document.body.style.backgroundColor = "#" + randomColor
+}
+
+function setBackground2() { //sets bg color by interval once button clicked
+	const interval = 2000
+    window.setInterval(  updateBackground, interval )
+}
+
+function updateBackground(){
+	let randomColor 
+	randomColor = Math.floor(Math.random()*16777215).toString(16)
+	document.body.style.backgroundColor = "#" + randomColor
+	return true
 }

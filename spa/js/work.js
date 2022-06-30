@@ -10,7 +10,7 @@ export async function setup(node) {
 	console.log('WORK: setup')
 	try {
 		console.log(node)
-		customiseNavbar(['home', 'logout', 'issues'])
+		customiseNavbar(['home', 'logout', 'addIssue'])
 		document.querySelector('#technician').classList.add('hidden')
 		if(localStorage.getItem('authorization') === null || localStorage.getItem('admin') != 1 ) {
 			history.pushState(null, null, '/login')
@@ -85,6 +85,6 @@ function goDetails() {
 	console.log("godetails")
 	console.log(this.parentNode.children[0].innerText)
 	let id = this.parentNode.children[0].innerText
-	loadPage2("issue",id)
+	loadPage2("issues",id)
 }
 

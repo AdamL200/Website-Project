@@ -96,7 +96,7 @@ h1 {
 
 header {
     width: 100%;
-    background-color:lightpink;
+    background-color: lightblue;
     padding: 1em;
     padding-bottom: 0.5em;
     display: flex;
@@ -138,4 +138,21 @@ section p{
 h2{
     display: flex;
     justify-content: center;
+}
+
+.neonText {
+  color: #fff;
+  text-shadow:
+    /* White glow */
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    /* Green glow */
+    0 0 42px darkgreen,
+    0 0 82px darkgreen,
+    0 0 92px darkgreen,
+    0 0 102px darkgreen,
+    0 0 63px darkgreen,
+    0 0 121px darkgreen,
+    0 0 30px darkgreen;
 }

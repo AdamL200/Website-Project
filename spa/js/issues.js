@@ -5,11 +5,11 @@ console.log('ADD ISSUE PAGE')
 import { customiseNavbar, file2DataURI, loadPage,loadPage2, router, showMessage } from '../util.js'
 
 export async function setup(node) {
-	console.log(' ISSUE: setup')
+	console.log(' ISSUES: setup')
 	try {
 		console.log(node)
          
-		document.querySelector('header p').innerText = 'Issue Page'
+		document.querySelector('header p').innerText = 'Issues Page'
 		document.querySelector('#technician').classList.add('hidden')
 		customiseNavbar(['home', 'logout', 'addIssue', 'work'])
 		if(localStorage.getItem('authorization') === null || localStorage.getItem('admin') == 0) {
@@ -21,7 +21,7 @@ export async function setup(node) {
             console.log("id unspecified")
             await noIDcontent(node)
         } else{
-            const id = window.location.pathname.slice(7)
+            const id = window.location.pathname.slice(8)
             await idContent(node,id)
 			const button1 = document.createElement('button')
 			button1.id = "accept"
@@ -54,7 +54,7 @@ async function noIDcontent(node) {
 async function idContent(node, id) {
 	console.log('func idContent')
     const title = document.createElement('h2')
-    title.innerText = `welcome to issue ${id} `
+    title.innerText = `welcome to issues ${id} `
     node.appendChild(title)
 	
 	document.querySelector('aside > p').innerText = 'LOADING'
@@ -77,7 +77,7 @@ async function idContent(node, id) {
 	const json = await response.json()
 	//console.log(json)
 	//console.log(json.data.issues[0]) //grabs a single issue
-	const template = document.querySelector('template#issue')
+	const template = document.querySelector('template#issues')
 	console.log(json)
 	const issue = json.data.issue[0] 
 	const fragment = template.content
