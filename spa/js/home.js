@@ -28,7 +28,7 @@ export async function setup(node) {
 		/*const button = document.createElement("button")
 		button.innerText = "Random Color!"
 		button.type = "button"
-		button.addEventListener('click', setBackground)
+		button.addEventListener('click', setAniBackground)
 		node.appendChild(button) */
 
 
@@ -130,8 +130,15 @@ async function addAdminContent(node) {
 }
 
 function setBackground() { //sets random bg color by click
-    const randomColor = Math.floor(Math.random()*16777215).toString(16)
-	document.body.style.backgroundColor = "#" + randomColor
+    var color1 = random_rgba()
+	var color2 = random_rgba()
+	var color3 = random_rgba()
+	var color4 = random_rgba()
+	var color5 = random_rgba()
+	var color6 = random_rgba()
+	var color7 = random_rgba()
+	document.body.style.backgroundImage = `linear-gradient(to bottom right,${color1},${color2},${color3},${color4},${color5},${color6},${color7})`
+
 }
 
 function setBackground2() { //sets bg color by interval once button clicked
@@ -144,4 +151,15 @@ function updateBackground(){
 	randomColor = Math.floor(Math.random()*16777215).toString(16)
 	document.body.style.backgroundColor = "#" + randomColor
 	return true
+}
+
+function random_rgba() {
+    var o = Math.round, r = Math.random, s = 255;
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+}
+
+function setAniBackground(){
+	document.querySelector('main').classList.add("wrapper")
+	document.querySelector('footer').classList.add("wrapper")
+	document.querySelector('body').classList.add("wrapper")
 }
